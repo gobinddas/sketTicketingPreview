@@ -1,0 +1,214 @@
+.box-white {
+  padding: 15px;
+  border-radius: 10px;
+
+}
+
+// section heading 
+
+.section-heading {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 90px;
+    height: 1px;
+    /* Adjust the height of the underline */
+    background-color: currentColor;
+    /* Uses the current text color */
+    position: absolute;
+    bottom: -5px;
+    /* Adjust the space between text and underline */
+    left: 0;
+    /* Aligns the underline with the start of the heading */
+  }
+}
+
+
+// overflow-y 
+
+.overflow-y {
+
+  overflow-y: scroll;
+
+  /* Custom scrollbar styles */
+  &::-webkit-scrollbar {
+    width: 8px;
+    /* Width of the scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $hover;
+    /* Background of the scrollbar track */
+    border-radius: 10px;
+    /* Rounded corners for the track */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #555;
+    /* Color of the scrollbar thumb */
+    border-radius: 10px;
+    /* Rounded corners for the thumb */
+    border: 2px solid #2b2b2b;
+    /* Adds space around the thumb */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #777;
+    /* Color when hovering over the scrollbar thumb */
+  }
+}
+
+
+
+
+// page overflow data overflow
+
+.page-overflow {
+  height: calc(100vh - 20px);
+}
+
+// page overflow data overflow end
+
+
+
+
+// table 
+
+
+
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  /* Removes the default spacing between table cells */
+  margin: 15px 0px;
+
+  thead {
+    background-color: #333;
+    /* Dark background for the table header */
+    color: $white;
+    /* White text for the header */
+
+    th {
+      padding: 10px;
+      /* Padding inside each header cell */
+      text-align: left;
+      /* Align text to the left */
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      /* Uppercase header text */
+    }
+  }
+
+  tbody {
+    tr {
+      &:nth-child(even) {
+        background-color: $black;
+        /* Light gray background for even rows */
+      }
+
+      &:hover {
+        background-color: $black;
+        /* Slightly darker background on row hover */
+      }
+
+      td {
+        padding: 10px;
+        /* Padding inside each table cell */
+        font-size: 12px;
+        border-bottom: 1px solid $t-color;
+        /* Light gray border between rows */
+      }
+    }
+  }
+
+  /* Add a border to the entire table */
+  th,
+  td {
+    border: 1px solid $t-color;
+  }
+}
+
+
+
+
+// Ticketing price page form 
+
+.ticket-prices-page {
+  form {
+    margin-top: 30px;
+    width: 60%;
+    background-color: $secondaryColor;
+    padding: 40px;
+    border-radius: 30px;
+
+    .form-group {
+      width: 100%;
+      display: flex;
+      gap: 30px;
+
+      div {
+        width: 50%;
+
+        label {
+          font-size: 18px;
+          font-weight: 500;
+          font-family: $Mont;
+        }
+
+        input {
+          width: 100%;
+          padding: 7px 10px;
+          border-radius: 10px;
+          outline: none;
+          border: none;
+          background-color: $hover;
+          color: $white;
+          font-size: 16px;
+          box-sizing: border-box;
+        }
+
+
+      }
+
+
+    }
+
+    button {
+      font-size: 16px;
+      font-weight: 500;
+      padding: 10px 30px;
+      border-radius: 20px;
+      color: #262626;
+      background-color: #dcdcdc;
+      border: 2px solid #353537;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      letter-spacing: 1px;
+      margin-top: 30px;
+
+      &:hover {
+        background-color: transparent;
+        border: 2px solid $white;
+        color: $white;
+
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+@include custom_max(992px) {}

@@ -1,0 +1,25 @@
+.page-balance-sheet {
+  .sub-heading {
+    font-size: 16px;
+    margin: 5px 0px 15px 0px;
+  }
+
+  .select-filter {
+    display: flex;
+    justify-content: start;
+    gap: 40px;
+
+    input,
+    select {
+      width: 40%;
+      padding: 7px 10px;
+      border-radius: 10px;
+      outline: none;
+      border: none;
+      background-color: $hover;
+      color: $white;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+  }
+}

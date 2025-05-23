@@ -1,0 +1,21 @@
+.App {
+  display: flex;
+  justify-content: space-between;
+  height: calc(100vh - 20px);
+  overflow: hidden;
+  padding: 10px;
+
+  .sidebar {
+    width: 12%;
+  }
+
+  hr {
+    width: 0.3px;
+    height: 100%;
+    // background-color: $secondaryColor;
+  }
+
+  .content {
+    width: 83%;
+  }
+}
