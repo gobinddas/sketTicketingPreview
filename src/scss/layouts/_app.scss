@@ -19,3 +19,10 @@
     width: 83%;
   }
 }
+
+// responsive 
+@media screen and (max-width:991px) {
+ .App{
+  justify-content: space-around;
+ }
+}

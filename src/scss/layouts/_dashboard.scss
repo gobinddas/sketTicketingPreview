@@ -20,7 +20,7 @@
 
         .item {
           width: 42%;
-          background-color: $hover;
+          background-color: #f5f5;
 
           // ticketing-section start
           .ticket-prices {
@@ -79,7 +79,7 @@
       // box flex structure end 
       // tickiting section 
       .ticketing-form {
-        background-color: $secondaryColor;
+        background-color: #c7c7c7;
 
         h2 {
           color: $black;
@@ -134,8 +134,8 @@
 
           .total-price {
             font-size: 18px;
-            color: $white;
-            font-weight: 600;
+            color: #000;
+            font-weight: 800;
             margin: 15px 0px;
           }
 
@@ -183,15 +183,39 @@
         // active session start 
         .active-sessions {
           height: 48%;
-          background-color: $hover;
-
+          background-color: #f8f888;
+          color: black;
+          h2{
+            color: #000;
+          }
+          table{
+            thead{
+              color: $black;
+              th{
+                color: $black;
+              }
+            }
+          }
         }
 
         // active sectio end 
 
         .sessions-ending-soon {
           height: 48%;
-          background-color: $hover;
+          background-color:#f8f888;
+          color: black ;
+          h2{
+            color: #000;
+            font-weight: 600;
+          }
+            table{
+            thead{
+              color: $black;
+              th{
+                color: $black;
+              }
+            }
+          }
         }
 
       }
@@ -199,4 +223,47 @@
 
     }
   }
+}
+
+
+
+// responsive 
+
+@media screen and (max-width:991px) {
+  .dashboard{
+    overflow: scroll;
+    scroll-behavior: smooth;
+    .main-content{
+      flex-direction: column;
+      width: 100%;
+      gap: 30px;
+      height: fit-content;
+      .dashboard-two-box{
+        width: 100%;
+        gap: 30px;
+      }
+    }
+  }
+
+
+  
+}
+
+
+@media screen and (max-width:687px) {
+
+  .dashboard{
+    .main-content{
+      .dashboard-two-box{
+        .dashboard-two-box-inner{
+          flex-direction: column;
+          gap: 30px;
+          .item{
+            width: 95%;
+          }
+        }
+      }
+    }
+  }
+  
 }

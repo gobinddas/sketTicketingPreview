@@ -90,9 +90,10 @@ table {
   margin: 15px 0px;
 
   thead {
-    background-color: #333;
+    background-color:transparent;
     /* Dark background for the table header */
     color: $white;
+    
     /* White text for the header */
 
     th {
@@ -110,12 +111,12 @@ table {
   tbody {
     tr {
       &:nth-child(even) {
-        background-color: $black;
+        // background-color: $black;
         /* Light gray background for even rows */
       }
 
       &:hover {
-        background-color: $black;
+        // background-color: $transprant;
         /* Slightly darker background on row hover */
       }
 
@@ -123,7 +124,7 @@ table {
         padding: 10px;
         /* Padding inside each table cell */
         font-size: 12px;
-        border-bottom: 1px solid $t-color;
+        border-bottom: 1px solid $white;
         /* Light gray border between rows */
       }
     }
@@ -132,7 +133,7 @@ table {
   /* Add a border to the entire table */
   th,
   td {
-    border: 1px solid $t-color;
+    border: 1px solid $white;
   }
 }
 
@@ -145,10 +146,10 @@ table {
   form {
     margin-top: 30px;
     width: 60%;
-    background-color: $secondaryColor;
+    background-color: #f5f5;
     padding: 40px;
     border-radius: 30px;
-
+    color: $white;
     .form-group {
       width: 100%;
       display: flex;
@@ -186,7 +187,7 @@ table {
       font-weight: 500;
       padding: 10px 30px;
       border-radius: 20px;
-      color: #262626;
+      color: #262626cc;
       background-color: #dcdcdc;
       border: 2px solid #353537;
       cursor: pointer;

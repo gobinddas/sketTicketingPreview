@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #242529;
+  background-color: #004d4d;
 }
 
 body,
@@ -139,7 +139,7 @@ table {
   /* Add a border to the entire table */
 }
 table thead {
-  background-color: #333;
+  background-color: transparent;
   /* Dark background for the table header */
   color: #fff;
   /* White text for the header */
@@ -155,31 +155,30 @@ table thead th {
   /* Uppercase header text */
 }
 table tbody tr:nth-child(even) {
-  background-color: #262626;
   /* Light gray background for even rows */
 }
 table tbody tr:hover {
-  background-color: #262626;
   /* Slightly darker background on row hover */
 }
 table tbody tr td {
   padding: 10px;
   /* Padding inside each table cell */
   font-size: 12px;
-  border-bottom: 1px solid #595959;
+  border-bottom: 1px solid #fff;
   /* Light gray border between rows */
 }
 table th,
 table td {
-  border: 1px solid #595959;
+  border: 1px solid #fff;
 }
 
 .ticket-prices-page form {
   margin-top: 30px;
   width: 60%;
-  background-color: #13aac7;
+  background-color: rgba(255, 85, 255, 0.3333333333);
   padding: 40px;
   border-radius: 30px;
+  color: #fff;
 }
 .ticket-prices-page form .form-group {
   width: 100%;
@@ -210,7 +209,7 @@ table td {
   font-weight: 500;
   padding: 10px 30px;
   border-radius: 20px;
-  color: #262626;
+  color: rgba(38, 38, 38, 0.8);
   background-color: #dcdcdc;
   border: 2px solid #353537;
   cursor: pointer;
@@ -242,6 +241,11 @@ table td {
   width: 83%;
 }
 
+@media screen and (max-width: 991px) {
+  .App {
+    justify-content: space-around;
+  }
+}
 .sidebar .logo {
   width: 100%;
 }
@@ -268,20 +272,23 @@ table td {
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 4px 0px 4px rgba(0, 0, 0, 0.1);
 }
-.sidebar .logout button {
-  padding: 10px 20px;
-  font-size: 14px;
+
+.hambars {
+  display: none;
+}
+.hambars button {
+  font-size: 25px;
   font-weight: 600;
   border-radius: 10px;
-  background-color: #13aac7;
-  border: 2px solid #13aac7;
-  color: #fff;
-  font-family: "Montserrat Alternates", sans-serif;
-  transition: 0.3s ease-in-out;
-}
-.sidebar .logout button:hover {
   background-color: transparent;
-  color: #13aac7;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+.hambars button:hover {
+  background-color: transparent;
+  transform: scale(1.2);
+  transition: 600ms ease-in-out;
 }
 
 a.active-link {
@@ -291,6 +298,50 @@ a.active-link {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 4px 0px 4px rgba(0, 0, 0, 0.1);
 }
 
+@media screen and (max-width: 991px) {
+  .sidebar {
+    display: none;
+    width: 100%;
+    overflow: scroll;
+  }
+  .hambars {
+    display: block;
+    height: fit-content;
+  }
+  .ham-nav {
+    overflow: scroll;
+    width: 100vw;
+    text-align: center;
+  }
+  .ham-nav .logo {
+    width: 50%;
+    margin-left: 25%;
+    padding: 0;
+  }
+  .ham-nav .logo img {
+    width: 60%;
+    border-radius: 10px;
+  }
+  .ham-nav nav {
+    width: 100%;
+    margin-top: 30px;
+  }
+  .ham-nav nav ul li a {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    line-height: 3;
+    transition: 0.3s ease-in-out;
+    padding: 10px 15px;
+  }
+  .ham-nav nav ul li:hover a,
+  .ham-nav nav ul li .active a {
+    padding: 10px 15px;
+    background-color: #353537;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 4px 0px 4px rgba(0, 0, 0, 0.1);
+  }
+}
 .dashboard {
   height: 100%;
 }
@@ -312,7 +363,7 @@ a.active-link {
 }
 .dashboard .main-content .dashboard-two-box .dashboard-two-box-inner .item {
   width: 42%;
-  background-color: #353537;
+  background-color: rgba(255, 85, 255, 0.3333333333);
 }
 .dashboard .main-content .dashboard-two-box .dashboard-two-box-inner .item .ticket-prices P {
   font-size: 18px;
@@ -344,7 +395,7 @@ a.active-link {
   margin-right: 10px;
 }
 .dashboard .main-content .dashboard-two-box .ticketing-form {
-  background-color: #13aac7;
+  background-color: #c7c7c7;
 }
 .dashboard .main-content .dashboard-two-box .ticketing-form h2 {
   color: #262626;
@@ -392,8 +443,8 @@ a.active-link {
 }
 .dashboard .main-content .dashboard-two-box .ticketing-form form .total-price {
   font-size: 18px;
-  color: #fff;
-  font-weight: 600;
+  color: #000;
+  font-weight: 800;
   margin: 15px 0px;
 }
 .dashboard .main-content .dashboard-two-box .ticketing-form form button {
@@ -428,13 +479,59 @@ a.active-link {
 }
 .dashboard .main-content .dashboard-two-box .two-box-right .active-sessions {
   height: 48%;
-  background-color: #353537;
+  background-color: #f8f888;
+  color: black;
+}
+.dashboard .main-content .dashboard-two-box .two-box-right .active-sessions h2 {
+  color: #000;
+}
+.dashboard .main-content .dashboard-two-box .two-box-right .active-sessions table thead {
+  color: #262626;
+}
+.dashboard .main-content .dashboard-two-box .two-box-right .active-sessions table thead th {
+  color: #262626;
 }
 .dashboard .main-content .dashboard-two-box .two-box-right .sessions-ending-soon {
   height: 48%;
-  background-color: #353537;
+  background-color: #f8f888;
+  color: black;
+}
+.dashboard .main-content .dashboard-two-box .two-box-right .sessions-ending-soon h2 {
+  color: #000;
+  font-weight: 600;
+}
+.dashboard .main-content .dashboard-two-box .two-box-right .sessions-ending-soon table thead {
+  color: #262626;
+}
+.dashboard .main-content .dashboard-two-box .two-box-right .sessions-ending-soon table thead th {
+  color: #262626;
 }
 
+@media screen and (max-width: 991px) {
+  .dashboard {
+    overflow: scroll;
+    scroll-behavior: smooth;
+  }
+  .dashboard .main-content {
+    flex-direction: column;
+    width: 100%;
+    gap: 30px;
+    height: fit-content;
+  }
+  .dashboard .main-content .dashboard-two-box {
+    width: 100%;
+    gap: 30px;
+  }
+}
+@media screen and (max-width: 687px) {
+  .dashboard .main-content .dashboard-two-box .dashboard-two-box-inner {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .dashboard .main-content .dashboard-two-box .dashboard-two-box-inner .item {
+    width: 95%;
+  }
+}
 .login-container {
   display: flex;
   flex-direction: row;
