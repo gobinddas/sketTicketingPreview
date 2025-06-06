@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
 const ActiveSession = ({ activeSessions }) => {
   console.log(activeSessions); // Check if the data is received correctly
 
   return (
-    <div className='page-overflow overflow-y'>
-      <h2 className='section-heading'>Active Sessions</h2>
-      <table className=''>
+    <div className="active-sessions page-overflow overflow-y">
+      <h2 className="section-heading">Active Sessions</h2>
+      <table className="">
         <thead>
           <tr>
             <th>Name</th>
@@ -21,8 +21,18 @@ const ActiveSession = ({ activeSessions }) => {
               <tr key={index}>
                 <td>{session.name}</td>
                 <td>{session.people}</td>
-                <td>{new Date(session.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-                <td>{new Date(session.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+                <td>
+                  {new Date(session.startTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </td>
+                <td>
+                  {new Date(session.endTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </td>
               </tr>
             ))
           ) : (

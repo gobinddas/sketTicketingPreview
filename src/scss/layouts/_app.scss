@@ -17,12 +17,22 @@
 
   .content {
     width: 83%;
+    padding: 10px;
+  }
+}
+.active-sessions {
+  background-color: #0a0d12ce;
+  border-radius: 12px;
+  padding: 10px;
+  height: 95%;
+  h2 {
+    color: white;
   }
 }
 
-// responsive 
-@media screen and (max-width:991px) {
- .App{
-  justify-content: space-around;
- }
+// responsive
+@media screen and (max-width: 991px) {
+  .App {
+    justify-content: space-around;
+  }
 }
