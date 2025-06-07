@@ -1,64 +1,183 @@
 // components/WarningBox.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from "react";
 
 const WarningBox = ({ activeSessions }) => {
   const [warningSessions, setWarningSessions] = useState([]);
+  const [debugInfo, setDebugInfo] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const spokenNamesRef = useRef(new Set()); // Track which names we've already spoken
+  const currentAudioRef = useRef(null); // Track current audio element
+
+  // Replace this with your actual Cloudflare Worker URL
+  const WORKER_URL = "https://melotts-speech-service.anishkarkee45.workers.dev";
 
   useEffect(() => {
     const checkWarningSessions = () => {
       const currentTime = new Date();
-      const warningList = activeSessions.filter(session => {
-        const endTime = new Date(session.endTime); // Parse ISO format to Date object
+      const warningList = activeSessions.filter((session) => {
+        const endTime = new Date(session.endTime);
         const timeDiff = endTime - currentTime;
-        return timeDiff > 0 && timeDiff <= 0.5 * 60 * 1000; // 5 minutes in milliseconds
+        return timeDiff > 0 && timeDiff <= 30 * 1000; // 30 seconds
       });
 
       setWarningSessions(warningList);
 
-      // Call out names for new warning sessions
-      warningList.forEach(session => {
-        if (!warningSessions.find(ws => ws.name === session.name)) {
-          speakName(session.name);
+      // Check for new sessions that need speech alerts
+      warningList.forEach((session) => {
+        const sessionKey = `${session.name}-${session.endTime}`; // Unique key per session
+        if (!spokenNamesRef.current.has(sessionKey)) {
+          spokenNamesRef.current.add(sessionKey);
+          speakNameWithMeloTTS(session.name);
+          setDebugInfo(
+            (prev) =>
+              prev +
+              `\nTrying to speak: ${
+                session.name
+              } at ${new Date().toLocaleTimeString()}`
+          );
+        }
+      });
+
+      // Clean up old spoken names (sessions that are no longer in warning list)
+      const currentSessionKeys = new Set(
+        warningList.map((s) => `${s.name}-${s.endTime}`)
+      );
+      spokenNamesRef.current.forEach((key) => {
+        if (!currentSessionKeys.has(key)) {
+          spokenNamesRef.current.delete(key);
         }
       });
     };
 
-    const intervalId = setInterval(checkWarningSessions, 1000); // Check every 1 seconds
+    const intervalId = setInterval(checkWarningSessions, 1000);
+    checkWarningSessions(); // Run immediately
 
     return () => clearInterval(intervalId);
-  }, [activeSessions, warningSessions]);
+  }, [activeSessions]);
 
-  const speakName = (name) => {
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(`${name}, your session is ending in 30 seconds`);
+  const speakNameWithMeloTTS = async (name) => {
+    try {
+      setDebugInfo((prev) => prev + `\nMeloTTS speech attempt for: ${name}`);
+      setIsPlaying(true);
 
-      // Wait for voices to be loaded
-      const loadVoices = () => {
-        const voices = window.speechSynthesis.getVoices();
-        const naturalVoice = voices.find(voice => voice.name.includes('Google UK English Female') || voice.name.includes('Google US English'));
-        if (naturalVoice) {
-          utterance.voice = naturalVoice;
-        }
-        window.speechSynthesis.speak(utterance);
+      // Stop any currently playing audio
+      if (currentAudioRef.current) {
+        currentAudioRef.current.pause();
+        currentAudioRef.current = null;
+      }
+
+      const text = `${name}, your session is ending in 30 seconds`;
+
+      setDebugInfo((prev) => prev + `\nSending request to MeloTTS...`);
+
+      // Call Cloudflare Worker
+      const response = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: text,
+          language: "en",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Unknown error");
+      }
+
+      setDebugInfo((prev) => prev + `\nReceived audio data, playing...`);
+
+      // Convert base64 to blob and create audio URL
+      const audioBlob = base64ToBlob(data.audio, "audio/mpeg");
+      const audioUrl = URL.createObjectURL(audioBlob);
+
+      // Create and play audio element
+      const audio = new Audio(audioUrl);
+      currentAudioRef.current = audio;
+
+      audio.onloadstart = () => {
+        setDebugInfo((prev) => prev + `\nAudio loading started for: ${name}`);
       };
 
-      // If voices are already loaded, speak immediately
-      if (window.speechSynthesis.getVoices().length > 0) {
-        loadVoices();
-      } else {
-        window.speechSynthesis.onvoiceschanged = loadVoices;
-      }
+      audio.oncanplay = () => {
+        setDebugInfo((prev) => prev + `\nAudio ready to play for: ${name}`);
+      };
+
+      audio.onplay = () => {
+        setDebugInfo((prev) => prev + `\nAudio started playing for: ${name}`);
+      };
+
+      audio.onended = () => {
+        setDebugInfo((prev) => prev + `\nAudio finished playing for: ${name}`);
+        setIsPlaying(false);
+        URL.revokeObjectURL(audioUrl); // Clean up blob URL
+        currentAudioRef.current = null;
+      };
+
+      audio.onerror = (event) => {
+        setDebugInfo(
+          (prev) => prev + `\nAudio playback error for ${name}: ${event.error}`
+        );
+        setIsPlaying(false);
+        URL.revokeObjectURL(audioUrl);
+        currentAudioRef.current = null;
+      };
+
+      await audio.play();
+    } catch (error) {
+      setDebugInfo(
+        (prev) => prev + `\nError in MeloTTS speech: ${error.message}`
+      );
+      setIsPlaying(false);
+      console.error("MeloTTS Error:", error);
     }
   };
 
-  window.speechSynthesis.getVoices().forEach(v => console.log(v.name));
+  // Helper function to convert base64 to blob
+  const base64ToBlob = (base64, mimeType) => {
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
+  };
+
+  // Test speech function (for debugging)
+  const testMeloTTS = () => {
+    speakNameWithMeloTTS("Test User");
+  };
+
+  // Clear debug info
+  const clearDebug = () => {
+    setDebugInfo("");
+  };
+
+  // Stop current audio
+  const stopAudio = () => {
+    if (currentAudioRef.current) {
+      currentAudioRef.current.pause();
+      currentAudioRef.current = null;
+      setIsPlaying(false);
+      setDebugInfo((prev) => prev + `\nAudio stopped manually`);
+    }
+  };
 
   return (
     <div className="warning-box overflow-y">
-      <h3 className='section-heading'>30 Seconds warning</h3>
+      <h3 className="section-heading">30 Seconds Warning</h3>
+
       {warningSessions.length > 0 ? (
         warningSessions.map((session, index) => (
-          <div key={index} className='warning-block'>
+          <div key={index} className="warning-block">
             <p>Name: {session.name}</p>
             <p>End Time: {new Date(session.endTime).toLocaleTimeString()}</p>
           </div>

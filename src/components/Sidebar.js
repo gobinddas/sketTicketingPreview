@@ -77,7 +77,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
-                to="https://bijuwarsp.bluebugsoft.com/support.php"
+                to="#"
                 className={({ isActive }) =>
                   isActive ? "active-link" : undefined
                 }
@@ -145,7 +145,7 @@ const Sidebar = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="https://bijuwarsp.bluebugsoft.com/support.php"
+                      to="#"
                       className={({ isActive }) =>
                         isActive ? "active-link" : undefined
                       }

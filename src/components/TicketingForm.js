@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useTicketPrices } from './TicketingPriceContext';
+import React, { useState, useEffect } from "react";
+import { useTicketPrices } from "./TicketingPriceContext";
 
 const TicketingForm = ({ setActiveSessions }) => {
-  const { ticketPrices, setTicketPrices } = useTicketPrices()
-  const [name, setName] = useState('');
+  const { ticketPrices, setTicketPrices } = useTicketPrices();
+  const [name, setName] = useState("");
   const [adults, setAdults] = useState(0); // Set initial value to 1
   const [kids, setKids] = useState(0);
   const [adultPrice, setAdultPrice] = useState(ticketPrices.adult); // Default value, will be updated from API
@@ -11,12 +11,10 @@ const TicketingForm = ({ setActiveSessions }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [duration, setDuration] = useState(1); // Default to 1 hour
 
-
-
   useEffect(() => {
     // Calculate the total price based on the number of people and duration
-   
-    const price = ((adults * adultPrice) + (kids * kidPrice)) * duration;
+
+    const price = (adults * adultPrice + kids * kidPrice) * duration;
     setTotalPrice(price);
   }, [adults, kids, adultPrice, kidPrice, duration]);
 
@@ -34,24 +32,22 @@ const TicketingForm = ({ setActiveSessions }) => {
 
     // Store session data locally only
 
-    setActiveSessions(prevSessions => {
+    setActiveSessions((prevSessions) => {
       const updatedSessions = [...prevSessions, newSession];
       // Update localStorage
-      localStorage.setItem('activeSessions', JSON.stringify(updatedSessions));
+      localStorage.setItem("activeSessions", JSON.stringify(updatedSessions));
       return updatedSessions;
     });
-    ;
-
     printPOSReceipt(newSession);
 
-    setName('');
+    setName("");
     setAdults(1);
     setKids(0);
     setDuration(1);
   };
 
   const printPOSReceipt = (session) => {
-    const printContent = document.createElement('div');
+    const printContent = document.createElement("div");
     printContent.innerHTML = `
       <style>
         @page {
@@ -67,7 +63,7 @@ const TicketingForm = ({ setActiveSessions }) => {
         .bold { font-weight: bold; }
         hr { border-top: 1px dashed #000; }
       </style>
-      <div class="center bold">Bijuwar Skate Park</div>
+      <div class="center bold">Tikkit</div>
       <hr>
       <div>Date: ${new Date().toLocaleString()}</div>
       <div>Customer: <strong>${session.name}</strong></div>
@@ -84,7 +80,7 @@ const TicketingForm = ({ setActiveSessions }) => {
       <p class="center" style="font-size: 14px;">Powered by Bluebug Software.</p>
     `;
 
-    const printWindow = window.open('', '', 'width=300,height=600');
+    const printWindow = window.open("", "", "width=300,height=600");
     printWindow.document.open();
     printWindow.document.write(printContent.innerHTML);
     printWindow.document.close();
@@ -99,9 +95,9 @@ const TicketingForm = ({ setActiveSessions }) => {
 
   return (
     <div className="ticketing-form box-white">
-      <h2 className='section-heading'>Ticketing</h2>
+      <h2 className="section-heading">Ticketing</h2>
       <form onSubmit={handleSubmit}>
-        <div className='form-group'>
+        <div className="form-group">
           <div>
             <label htmlFor="name">Enter Customer Name :</label>
             <input
@@ -109,23 +105,25 @@ const TicketingForm = ({ setActiveSessions }) => {
               id="name"
               placeholder="Eg : Uttam Karki"
               value={name}
-              onChange={(e) => setName(e.target.value)} required
+              onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
         </div>
 
-        <div className='form-group'>
+        <div className="form-group">
           <div>
             <label htmlFor="adult">Number of Adults :</label>
             <input
               type="number"
-              id='adult'
+              id="adult"
               placeholder="Adult Numbers"
               value={adults}
               onChange={(e) => {
                 const value = Math.max(1, parseInt(e.target.value) || 1);
                 setAdults(value);
-              }} required
+              }}
+              required
               min="1" // Ensures minimum value is 1
             />
           </div>
@@ -135,18 +133,19 @@ const TicketingForm = ({ setActiveSessions }) => {
             <input
               type="number"
               placeholder="Kids"
-              id='kid'
+              id="kid"
               value={kids}
               onChange={(e) => {
                 const value = Math.max(0, parseInt(e.target.value) || 0);
                 setKids(value);
-              }} required
+              }}
+              required
               min="0" // Ensures minimum value is 0
             />
           </div>
         </div>
 
-        <div className='form-group'>
+        <div className="form-group">
           <div>
             <label htmlFor="duration">Select Duration (In Minutes):</label>
             <select
@@ -164,7 +163,7 @@ const TicketingForm = ({ setActiveSessions }) => {
           </div>
         </div>
 
-        <div className='total-price'>Total price: Rs. {totalPrice}</div>
+        <div className="total-price">Total price: Rs. {totalPrice}</div>
         <button type="submit">Confirm</button>
       </form>
     </div>
