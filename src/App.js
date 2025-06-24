@@ -12,7 +12,7 @@ import TicketsPrice from "./components/TicketsPrice";
 import BalanceSheet from "./components/BalanceSheet";
 import Support from "./components/Support";
 import { TicketingPriceProvider } from "./components/TicketingPriceContext";
-import "./App.css"; // Make sure to import the CSS file
+
 
 function App() {
   const [activeSessions, setActiveSessions] = useState(() => {
