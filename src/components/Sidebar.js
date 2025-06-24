@@ -77,11 +77,32 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
+                to="/analytics"
+                className={({ isActive }) =>
+                  isActive ? "active-link" : undefined
+                }
+              >
+                Analytics
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/membership"
+                className={({ isActive }) =>
+                  isActive ? "active-link" : undefined
+                }
+              >
+                Membership
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="#"
                 className={({ isActive }) =>
                   isActive ? "active-link" : undefined
                 }
                 target="blank"
+                style={{ backgroundColor: "#00B4D8", color: "white" }}
               >
                 Support
               </NavLink>
@@ -141,6 +162,26 @@ const Sidebar = () => {
                       }
                     >
                       Balance Sheet
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/analytics"
+                      className={({ isActive }) =>
+                        isActive ? "active-link" : undefined
+                      }
+                    >
+                      Analytics
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/membership"
+                      className={({ isActive }) =>
+                        isActive ? "active-link" : undefined
+                      }
+                    >
+                      Membership
                     </NavLink>
                   </li>
                   <li>

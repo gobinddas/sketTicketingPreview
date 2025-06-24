@@ -80,8 +80,24 @@ const TicketingForm = ({ setActiveSessions }) => {
       <p class="center" style="font-size: 14px;">Powered by Bluebug Software.</p>
     `;
 
-    const printWindow = window.open("", "", "width=300,height=600");
-    printWindow.document.open();
+    const printWindow = window.open("", "", "width=400,height=600");
+    printWindow.document.write(`
+      <style>
+        @page {
+          size: 80mm auto;
+          margin: 0;
+        }
+        body {
+          font-family: 'Courier New', monospace;
+          width: 80mm;
+          padding: 5mm;
+        }
+        .center { text-align: center; }
+        .bold { font-weight: bold; }
+        hr { border-top: 1px dashed #000; }
+      </style>
+    `);
+
     printWindow.document.write(printContent.innerHTML);
     printWindow.document.close();
 
@@ -95,6 +111,19 @@ const TicketingForm = ({ setActiveSessions }) => {
 
   return (
     <div className="ticketing-form box-white">
+      <style>
+        {`
+          /* Remove increment/decrement buttons */
+          input[type="number"]::-webkit-inner-spin-button,
+          input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          input[type="number"] {
+            -moz-appearance: textfield;
+          }
+        `}
+      </style>
       <h2 className="section-heading">Ticketing</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -120,11 +149,17 @@ const TicketingForm = ({ setActiveSessions }) => {
               placeholder="Adult Numbers"
               value={adults}
               onChange={(e) => {
-                const value = Math.max(1, parseInt(e.target.value) || 1);
+                const value = Math.max(0, parseInt(e.target.value) || 0);
                 setAdults(value);
               }}
               required
-              min="1" // Ensures minimum value is 1
+              min="0"
+              onWheel={(e) => e.target.blur()} // Prevent mouse wheel
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+                  e.preventDefault();
+                }
+              }} // Prevent arrow keys
             />
           </div>
 
@@ -141,6 +176,12 @@ const TicketingForm = ({ setActiveSessions }) => {
               }}
               required
               min="0" // Ensures minimum value is 0
+              onWheel={(e) => e.target.blur()} // Prevent mouse wheel
+              onKeyDown={(e) => {
+                if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+                  e.preventDefault();
+                }
+              }} // Prevent arrow keys
             />
           </div>
         </div>

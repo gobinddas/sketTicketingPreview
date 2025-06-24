@@ -146,7 +146,7 @@ table {
   form {
     margin-top: 30px;
     width: 60%;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background-color: rgba(10, 13, 18, 0.8078431373);
     padding: 50px;
     border-radius: 24px;
     color: $white;
@@ -269,7 +269,7 @@ table {
       font-size: 18px;
       font-weight: 600;
       padding: 16px 40px;
-      border-radius: 50px;
+      border-radius: 20px;
       color: #ffffff;
       background: linear-gradient(135deg, #64bbb2 0%, #4fa69e 100%);
       border: 2px solid transparent;

@@ -11,8 +11,9 @@ import ActiveSession from "./components/ActiveSession";
 import TicketsPrice from "./components/TicketsPrice";
 import BalanceSheet from "./components/BalanceSheet";
 import Support from "./components/Support";
+import Analytics from "./components/Analytics";
+import Membership from "./components/Membership";
 import { TicketingPriceProvider } from "./components/TicketingPriceContext";
-
 
 function App() {
   const [activeSessions, setActiveSessions] = useState(() => {
@@ -136,6 +137,8 @@ function App() {
                 <Route path="/tickets-price" element={<TicketsPrice />} />
                 <Route path="/balance-sheet" element={<BalanceSheet />} />
                 <Route path="/support" element={<Support />} />
+                <Route path="/analytics" element={<Analytics />} />
+                <Route path="/membership" element={<Membership />} />
                 <Route path="/login" element={<Navigate to="/" replace />} />
               </Routes>
             </div>

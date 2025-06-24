@@ -1,0 +1,543 @@
+// src/scss/layouts/_membership.scss
+
+// Base page styling, adapted from the analytics page theme
+.membership-page {
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 32px 24px;
+  background: #0a0d12ce;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  color: #f9fafb;
+  height: 87dvh;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  border: 1px solid #374151;
+
+  // Consistent heading styles
+  h2,
+  h3 {
+    color: #f9fafb;
+    margin-bottom: 18px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+}
+
+// Summary cards layout
+.analytics-summary-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 32px;
+
+  .summary-card {
+    flex: 1 1 180px;
+    min-width: 180px;
+    background: #374151;
+    border-radius: 12px;
+    border: 2px solid #4b5563;
+    padding: 18px 24px;
+    font-size: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .label {
+      color: #d1d5db;
+      font-size: 14px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .value {
+      font-size: 22px;
+      font-weight: 700;
+      color: #f9fafb;
+      letter-spacing: 0.01em;
+    }
+  }
+}
+
+// Charting section styles
+.analytics-chart-section {
+  margin-bottom: 32px;
+  min-width: 0; /* <-- ADD THIS LINE */
+
+  .chart-container {
+    width: 100%;
+    min-height: 220px;
+    background: #374151;
+    border-radius: 12px;
+    border: 2px solid #4b5563;
+    padding: 18px 12px 8px 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  }
+}
+
+// Charts section grid layout specific for membership page
+.membership-charts-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 18px;
+  margin-bottom: 32px;
+
+  .chart-container {
+    min-height: 250px;
+    height: 250px;
+  }
+}
+
+// Controls: search, filter, add button
+.membership-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-bottom: 18px;
+
+  .search-input,
+  .filter-select {
+    padding: 9px 14px;
+    border-radius: 12px;
+    border: 2px solid #4b5563;
+    background: #374151;
+    color: #f9fafb;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+
+    &:focus {
+      border-color: #64bbb2;
+      background-color: #4b5563;
+      box-shadow: 0 0 0 3px rgba(100, 187, 178, 0.2);
+    }
+  }
+
+  .btn-primary {
+    background: #64bbb2;
+    color: #181c2f;
+    border: none;
+    border-radius: 12px;
+    padding: 9px 20px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      background: #73c9c0;
+      box-shadow: 0 4px 16px rgba(100, 187, 178, 0.2);
+    }
+  }
+}
+
+// Modern data table styling
+.modern-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 32px;
+  background: #374151;
+  border-radius: 8px;
+  border: 2px solid #4b5563;
+
+  th,
+  td {
+    padding: 12px 16px;
+    border-bottom: 1.5px solid #4b5563;
+    text-align: left;
+    font-size: 15px;
+    color: #f9fafb;
+  }
+
+  th {
+    background: #232946;
+    color: #f9fafb;
+    font-weight: 600;
+  }
+
+  // Applies to the first row of the table head
+  thead tr:first-child th:first-child {
+    border-top-left-radius: 6px;
+  }
+  thead tr:first-child th:last-child {
+    border-top-right-radius: 6px;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover td {
+    background: #414a61; // A slightly lighter hover for better visibility
+  }
+
+  .table-no-data {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 16px;
+    padding: 32px 0;
+  }
+
+  .table-cell-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+  }
+}
+
+// Member-specific components
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #4b5563;
+  color: #f9fafb;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #64bbb2;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &.active {
+    background-color: rgba(100, 187, 178, 0.15);
+    color: #64bbb2;
+  }
+  &.inactive {
+    background-color: rgba(229, 115, 115, 0.15);
+    color: #e57373;
+  }
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 1rem;
+  margin: 0 4px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+
+  &.danger {
+    color: #e57373;
+  }
+
+  &:hover {
+    background: #4b5563;
+    color: #fff;
+  }
+}
+
+// Modal styles to match the dark theme
+.modal-bg {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(10, 13, 18, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-form {
+  width: 100%;
+  max-width: 450px;
+  background: #1f2937;
+  border: 1px solid #4b5563;
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  input,
+  select {
+    padding: 11px 16px;
+    border-radius: 12px;
+    border: 2px solid #4b5563;
+    background: #374151;
+    color: #f9fafb;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.2s ease;
+
+    &:focus {
+      border-color: #64bbb2;
+      box-shadow: 0 0 0 3px rgba(100, 187, 178, 0.2);
+    }
+  }
+
+  .btn-primary {
+    background: #64bbb2;
+    color: #181c2f;
+    font-weight: 700;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    transition: all 0.2s;
+
+    &:hover {
+      background: #73c9c0;
+    }
+  }
+
+  .btn-danger.btn-sm {
+    background: transparent;
+    color: #9ca3af;
+    border: 1px solid #4b5563;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 10px;
+
+    &:hover {
+      background: #4b5563;
+      color: #fff;
+    }
+  }
+
+  textarea {
+    background: #181c2f;
+    border: 1.5px solid #30344b;
+    color: #f9fafb;
+    border-radius: 7px;
+    padding: 10px 14px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    transition: border 0.2s;
+    // width: calc();
+
+    &:focus {
+      border: 1.5px solid #64bbb2;
+      outline: none;
+    }
+  }
+}
+
+// Membership benefits management styles
+.benefits-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-bottom: 36px;
+  align-items: stretch; // Use stretch to make cards equal height
+}
+
+.benefit-card {
+  background: #232946; // A more solid, premium base
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  min-width: 260px;
+  max-width: 340px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  border: 1.5px solid #30344b;
+  overflow: hidden; // Important for inner pseudo-elements
+  transition: all 0.3s ease-in-out;
+
+  // A pseudo-element for a cool hover glow effect
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle at 50% -20%,
+      // Position glow at the top
+      rgba(100, 187, 178, 0.15),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  &:hover {
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.25);
+    border-color: #64bbb2;
+    transform: translateY(-5px); // A bit more lift
+
+    &::before {
+      opacity: 1; // Reveal the glow on hover
+    }
+  }
+}
+
+// Icon container styling
+.benefit-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background-color: rgba(100, 187, 178, 0.1);
+  color: #64bbb2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+
+  // Animate icon on card hover
+  .benefit-card:hover & {
+    background-color: #64bbb2;
+    color: #1f2937;
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 4px 15px rgba(100, 187, 178, 0.3);
+  }
+}
+
+.benefit-title {
+  font-weight: 700;
+  color: #f9fafb; // White for better contrast
+  font-size: 1.15rem;
+  margin-bottom: 2px;
+  letter-spacing: 0.01em;
+}
+
+.benefit-desc {
+  color: #d1d5db; // Slightly dimmer for secondary text
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 16px; // Add more space at the bottom
+  flex-grow: 1; // This pushes the action buttons to the bottom
+}
+
+// Actions appear on hover
+.benefit-actions {
+  display: flex;
+  gap: 10px;
+  opacity: 0; // Hidden by default
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+
+  .icon-btn {
+    font-size: 1.1rem;
+    padding: 8px;
+    &:hover {
+      background: #374151; // Darker hover background
+    }
+  }
+
+  .benefit-card:hover & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// "Add Benefit" card styling
+.add-benefit-card {
+  background: transparent;
+  border-radius: 18px;
+  padding: 24px;
+  min-width: 260px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 2px dashed #4b5563;
+  cursor: pointer;
+  color: #9ca3af;
+  transition: all 0.3s ease-in-out;
+
+  .add-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    transition: transform 0.3s;
+  }
+
+  span {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  &:hover {
+    border-color: #64bbb2;
+    background-color: rgba(100, 187, 178, 0.05);
+    color: #64bbb2;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+
+    .add-icon {
+      transform: scale(1.2);
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 900px) {
+  .analytics-summary-cards {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .summary-card {
+    min-width: unset;
+  }
+  .membership-charts-section {
+    grid-template-columns: 1fr;
+    .chart-container {
+      height: 220px;
+    }
+  }
+  .benefits-list {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .benefit-card {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .membership-page {
+    padding: 12px 8px;
+  }
+  .analytics-summary-cards {
+    gap: 8px;
+  }
+  .analytics-chart-section .chart-container {
+    padding: 6px 2px;
+  }
+  .modern-table th,
+  .modern-table td {
+    padding: 8px 6px;
+    font-size: 13px;
+  }
+  .membership-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .modern-table .table-cell-name {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

@@ -5,12 +5,12 @@
 @import "modules/components";
 //Index Section Style
 
-
-
 @import "layouts/app";
 @import "layouts/sidebar";
 @import "layouts/dashboard";
 @import "layouts/login";
 
-// page 
+// page
 @import "layouts/pageBalanceSheet";
+@import "layouts/_analytics";
+@import "layouts/membership";

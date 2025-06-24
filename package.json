@@ -1,5 +1,5 @@
 {
-  "name": "bijuwarsp",
+  "name": "tikkit",
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bijuwarsp": "file:",
+    "chart.js": "^4.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",

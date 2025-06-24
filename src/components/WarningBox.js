@@ -178,8 +178,10 @@ const WarningBox = ({ activeSessions }) => {
       {warningSessions.length > 0 ? (
         warningSessions.map((session, index) => (
           <div key={index} className="warning-block">
-            <p>Name: {session.name}</p>
-            <p>End Time: {new Date(session.endTime).toLocaleTimeString()}</p>
+            <p style={{ color: "white" }}>Name: {session.name}</p>
+            <p style={{ color: "white" }}>
+              End Time: {new Date(session.endTime).toLocaleTimeString()}
+            </p>
           </div>
         ))
       ) : (
