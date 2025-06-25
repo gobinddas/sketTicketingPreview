@@ -12,9 +12,9 @@ const dummyMembers = [
   },
   {
     id: "MEM456",
-    name: "Prajwol Dhakal",
+    name: "Gobind Das",
     status: "Active",
-    email: "prajwol@example.com",
+    email: "gobind@example.com",
     phone: "9800000002",
   },
   {

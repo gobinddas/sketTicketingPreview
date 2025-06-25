@@ -604,7 +604,7 @@ const Membership = () => {
               disabled={page === 1}
               title="Previous"
             >
-              <i className="fas fa-chevron-left"></i>
+              Prev
             </button>
             <span style={{ color: "#d1d5db", fontWeight: 600 }}>
               Page {page} of {totalPages}
@@ -615,7 +615,7 @@ const Membership = () => {
               disabled={page === totalPages}
               title="Next"
             >
-              <i className="fas fa-chevron-right"></i>
+              next
             </button>
           </div>
         )}

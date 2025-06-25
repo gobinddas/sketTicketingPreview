@@ -345,18 +345,18 @@
 .benefit-card {
   background: #232946; // A more solid, premium base
   border-radius: 18px;
-  box-shadow: 0 4px 24px 0 #0003;
-  padding: 28px 22px 18px 22px;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.1);
+  padding: 24px;
   min-width: 260px;
   max-width: 340px;
   flex: 1 1 260px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   position: relative;
   border: 1.5px solid #30344b;
   overflow: hidden; // Important for inner pseudo-elements
-  transition: box-shadow 0.2s, border 0.2s, transform 0.15s;
+  transition: all 0.3s ease-in-out;
 
   // A pseudo-element for a cool hover glow effect
   &::before {
@@ -377,9 +377,9 @@
   }
 
   &:hover {
-    box-shadow: 0 8px 32px 0 #0005;
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.25);
     border-color: #64bbb2;
-    transform: translateY(-2px) scale(1.02); // A bit more lift
+    transform: translateY(-5px); // A bit more lift
 
     &::before {
       opacity: 1; // Reveal the glow on hover
@@ -389,24 +389,23 @@
 
 // Icon container styling
 .benefit-icon {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #64bbb2 60%, #232946 100%);
-  color: #fff;
+  background-color: rgba(100, 187, 178, 0.1);
+  color: #64bbb2;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.7rem;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 8px 0 #0002;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
 
   // Animate icon on card hover
   .benefit-card:hover & {
-    background: #64bbb2;
-    color: #232946;
-    transform: scale(1.08) rotate(-6deg);
+    background-color: #64bbb2;
+    color: #1f2937;
+    transform: scale(1.1) rotate(-5deg);
     box-shadow: 0 4px 15px rgba(100, 187, 178, 0.3);
   }
 }
@@ -414,16 +413,16 @@
 .benefit-title {
   font-weight: 700;
   color: #f9fafb; // White for better contrast
-  font-size: 1.13rem;
+  font-size: 1.15rem;
   margin-bottom: 2px;
   letter-spacing: 0.01em;
 }
 
 .benefit-desc {
   color: #d1d5db; // Slightly dimmer for secondary text
-  font-size: 15.5px;
-  margin-bottom: 6px;
-  opacity: 0.93;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 16px; // Add more space at the bottom
   flex-grow: 1; // This pushes the action buttons to the bottom
 }
 
@@ -431,31 +430,22 @@
 .benefit-actions {
   display: flex;
   gap: 10px;
-  margin-top: 2px;
-}
+  opacity: 0; // Hidden by default
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
 
-.benefit-actions .icon-btn {
-  color: #64bbb2;
-  font-size: 1.18rem;
-  background: none;
-  border: none;
-  border-radius: 7px;
-  padding: 7px 10px;
-  transition: background 0.15s, color 0.15s;
-}
+  .icon-btn {
+    font-size: 1.1rem;
+    padding: 8px;
+    &:hover {
+      background: #374151; // Darker hover background
+    }
+  }
 
-.benefit-actions .icon-btn:hover {
-  background: #232946;
-  color: #fff;
-}
-
-.benefit-actions .icon-btn.danger {
-  color: #e57373;
-}
-
-.benefit-actions .icon-btn.danger:hover {
-  color: #fff;
-  background: #e57373;
+  .benefit-card:hover & {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 // "Add Benefit" card styling
@@ -477,10 +467,9 @@
   transition: all 0.3s ease-in-out;
 
   .add-icon {
-    font-size: 2.2rem;
+    font-size: 2rem;
     margin-bottom: 8px;
-    color: #64bbb2;
-    transition: transform 0.3s, color 0.2s;
+    transition: transform 0.3s;
   }
 
   span {
@@ -490,15 +479,12 @@
 
   &:hover {
     border-color: #64bbb2;
-    background-color: rgba(100, 187, 178, 0.07);
+    background-color: rgba(100, 187, 178, 0.05);
     color: #64bbb2;
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 
     .add-icon {
-      color: #232946;
-      background: #64bbb2;
-      border-radius: 50%;
       transform: scale(1.2);
     }
   }
@@ -523,8 +509,7 @@
     flex-direction: column;
     gap: 16px;
   }
-  .benefit-card,
-  .add-benefit-card {
+  .benefit-card {
     min-width: 0;
     max-width: 100%;
     width: 100%;
